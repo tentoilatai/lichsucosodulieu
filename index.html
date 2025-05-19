@@ -1,138 +1,233 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lịch sử Cơ sở Dữ liệu</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f7fa;
-    color: #222;
-    margin: 0;
-    padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #34495e;
-    font-weight: 700;
-    font-size: 2.2em;
-  }
-  .timeline-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    overflow-x: auto;
-    padding-bottom: 20px;
-  }
-  .timeline-column {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(52,152,219,0.15);
-    padding: 18px 22px;
-    min-width: 260px;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    border: 2px solid #2980b9;
-    transition: transform 0.3s ease;
-  }
-  .timeline-column:hover {
-    box-shadow: 0 8px 20px rgba(41,128,185,0.4);
-    transform: translateY(-6px);
-  }
-  .timeline-title {
-    font-weight: 700;
-    font-size: 1.25em;
-    color: #2c3e50;
-    border-bottom: 3px solid #2980b9;
-    padding-bottom: 6px;
-    margin-bottom: 14px;
-  }
-  .item-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-    flex-grow: 1;
-  }
-  .item-list li {
-    background: #ebf4fc;
-    margin-bottom: 10px;
-    padding: 9px 14px;
-    border-radius: 9px;
-    color: #3a566e;
-    font-size: 0.95em;
-    box-shadow: inset 0 1px 0 #ffffffcc;
-    transition: background 0.3s ease;
-    cursor: default;
-  }
-  .item-list li:hover {
-    background: #d6e9fd;
-  }
-  .sub-list {
-    list-style-type: disc;
-    margin-left: 18px;
-    margin-top: 6px;
-  }
-  .sub-list li {
-    background: transparent;
-    margin-bottom: 6px;
-    padding: 5px 10px;
-    font-size: 0.9em;
-    color: #4a6a8a;
-  }
-  /* Scrollbar for horizontal scroll */
-  .timeline-container::-webkit-scrollbar {
-    height: 10px;
-  }
-  .timeline-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  .timeline-container::-webkit-scrollbar-thumb {
-    background: #2980b9;
-    border-radius: 5px;
-  }
-  /* Responsive for small screen */
-  @media (max-width: 600px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lịch sử Cơ sở Dữ liệu</title>
+  <style>
+    :root {
+      --primary-color: #2980b9;
+      --secondary-color: #34495e;
+      --bg-color: #f4f7fa;
+      --card-bg: #ffffff;
+      --text-color: #222;
+      --hover-bg: #d6e9fd;
+      --shadow-color: rgba(52, 152, 219, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Roboto', 'Noto Sans', -apple-system, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: clamp(1rem, 5vw, 2rem);
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: clamp(1.5rem, 4vw, 2rem);
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+
     .timeline-container {
-      gap: 18px;
-      padding-bottom: 14px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(clamp(200px, 30vw, 280px), 1fr);
+      gap: clamp(1rem, 3vw, 1.5rem);
+      overflow-x: auto;
+      padding: 1rem;
+      scroll-snap-type: x proximity;
+      scroll-padding: 1rem;
+      overscroll-behavior-x: contain;
     }
+
     .timeline-column {
-      min-width: 200px;
-      padding: 14px 16px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      padding: clamp(1rem, 2.5vw, 1.25rem);
+      border: 2px solid var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      scroll-snap-align: start;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
     }
+
+    .timeline-column:hover {
+      box-shadow: 0 8px 20px rgba(41, 128, 185, 0.4);
+      transform: translateY(-6px);
+    }
+
     .timeline-title {
-      font-size: 1.1em;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 3vw, 1.25rem);
+      color: var(--secondary-color);
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
+
+    .timeline-title small {
+      font-size: 0.8em;
+      color: #4a6a8a;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .item-list {
+      list-style: none;
+      flex-grow: 1;
+    }
+
     .item-list li {
-      font-size: 0.9em;
-      padding: 7px 10px;
+      background: #ebf4fc;
+      margin-bottom: 0.5rem;
+      padding: clamp(0.5rem, 2vw, 0.75rem);
+      border-radius: 8px;
+      color: #3a566e;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      transition: background 0.2s ease;
     }
-  }
-</style>
+
+    .item-list li:hover {
+      background: var(--hover-bg);
+    }
+
+    .sub-list {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .sub-list li {
+      background: transparent;
+      padding: 0.25rem 0.5rem;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      color: #4a6a8a;
+    }
+
+    /* Custom Scrollbar */
+    .timeline-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .timeline-container::-webkit-scrollbar-track {
+      background: #e9ecef;
+      border-radius: 4px;
+    }
+
+    .timeline-container::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+
+    /* Accessibility */
+    .timeline-column:focus {
+      outline: 3px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+      .timeline-container {
+        grid-auto-columns: minmax(180px, 1fr);
+        gap: 1rem;
+      }
+
+      .timeline-column {
+        min-width: 180px;
+        padding: 0.75rem;
+      }
+
+      .timeline-title {
+        font-size: 1.1rem;
+      }
+
+      .item-list li {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .timeline-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+      }
+
+      .timeline-column {
+        flex: 1 1 300px;
+        max-width: 350px;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .timeline-column {
+        max-width: 400px;
+      }
+    }
+
+    /* Touch Devices */
+    @media (hover: none) {
+      .timeline-column:hover {
+        transform: none;
+        box-shadow: 0 4px 12px var(--shadow-color);
+      }
+
+      .item-list li:hover {
+        background: #ebf4fc;
+      }
+    }
+
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .timeline-column {
+        border-color: #000;
+      }
+
+      .item-list li {
+        background: #ddd;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Lịch sử Cơ sở Dữ liệu</h1>
-  <div class="timeline-container">
-    <div class="timeline-column">
+  <div class="timeline-container" role="region" aria-label="Dòng thời gian lịch sử cơ sở dữ liệu">
+    <div class="timeline-column" tabindex="0">
       <div class="timeline-title">Trước 1960<br><small>Quản lý thủ công</small></div>
       <ul class="item-list">
         <li>Lưu trữ: Giấy, thẻ đục lỗ, băng từ</li>
-        <li>Hạn chế: Tốn thời gian, dễ sai sót</li>
+ rifles       <li>Hạn chế: Tốn thời gian, dễ sai sót</li>
       </ul>
     </div>
-    <div class="timeline-column">
-      <div class="timeline-title">1960s<br><small>Hệ thống tệp &amp; Mô hình phân cấp</small></div>
+    <div class="timeline-column" tabindex="0">
+      <div class="timeline-title">1960s<br><small>Hệ thống tệp & Mô hình phân cấp</small></div>
       <ul class="item-list">
         <li>Tệp-based systems: Ứng dụng tự quản lý dữ liệu</li>
         <li>IMS (IBM): Cấu trúc cây</li>
         <li>Hạn chế: Thiếu tính độc lập dữ liệu</li>
       </ul>
     </div>
-    <div class="timeline-column">
-      <div class="timeline-title">1970s<br><small>Mô hình mạng &amp; Quan hệ</small></div>
+    <div class="timeline-column" tabindex="0">
+      <div class="timeline-title">1970s<br><small>Mô hình mạng & Quan hệ</small></div>
       <ul class="item-list">
         <li>Mô hình mạng: CODASYL, cấu trúc đồ thị</li>
         <li>
@@ -145,7 +240,7 @@
         </li>
       </ul>
     </div>
-    <div class="timeline-column">
+    <div class="timeline-column" tabindex="0">
       <div class="timeline-title">1980s<br><small>DBMS quan hệ bùng nổ</small></div>
       <ul class="item-list">
         <li>Thương mại: Oracle, DB2, Sybase</li>
@@ -153,16 +248,16 @@
         <li>Ứng dụng: Ngân hàng, hàng không</li>
       </ul>
     </div>
-    <div class="timeline-column">
-      <div class="timeline-title">1990s<br><small>Hướng đối tượng &amp; Kho dữ liệu</small></div>
+    <div class="timeline-column" tabindex="0">
+      <div class="timeline-title">1990s<br><small>Hướng đối tượng & Kho dữ liệu</small></div>
       <ul class="item-list">
         <li>OODBMS: ObjectStore, GemStone</li>
         <li>Data Warehouse: BI, OLAP</li>
         <li>Web: Tích hợp dữ liệu trực tuyến</li>
       </ul>
     </div>
-    <div class="timeline-column">
-      <div class="timeline-title">2000s<br><small>NoSQL &amp; Big Data</small></div>
+    <div class="timeline-column" tabindex="0">
+      <div class="timeline-title">2000s<br><small>NoSQL & Big Data</small></div>
       <ul class="item-list">
         <li>
           NoSQL
@@ -174,8 +269,8 @@
         <li>Big Data: Hadoop, Spark</li>
       </ul>
     </div>
-    <div class="timeline-column">
-      <div class="timeline-title">2010s - Nay<br><small>Đám mây &amp; AI</small></div>
+    <div class="timeline-column" tabindex="0">
+      <div class="timeline-title">2010s - Nay<br><small>Đám mây & AI</small></div>
       <ul class="item-list">
         <li>Cloud DB: AWS RDS, Google Spanner</li>
         <li>Thời gian thực: Kafka, DynamoDB</li>
@@ -184,7 +279,7 @@
         <li>Blockchain: CSDL phi tập trung</li>
       </ul>
     </div>
-    <div class="timeline-column">
+    <div class="timeline-column" tabindex="0">
       <div class="timeline-title">Tương lai</div>
       <ul class="item-list">
         <li>Đa mô hình: PostgreSQL, MongoDB</li>
@@ -196,4 +291,3 @@
   </div>
 </body>
 </html>
-
