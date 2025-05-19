@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lịch sử Cơ sở Dữ liệu</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7fa;
+    color: #222;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #34495e;
+    font-weight: 700;
+    font-size: 2.2em;
+  }
+  .timeline-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+  }
+  .timeline-column {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(52,152,219,0.15);
+    padding: 18px 22px;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border: 2px solid #2980b9;
+    transition: transform 0.3s ease;
+  }
+  .timeline-column:hover {
+    box-shadow: 0 8px 20px rgba(41,128,185,0.4);
+    transform: translateY(-6px);
+  }
+  .timeline-title {
+    font-weight: 700;
+    font-size: 1.25em;
+    color: #2c3e50;
+    border-bottom: 3px solid #2980b9;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  .item-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  .item-list li {
+    background: #ebf4fc;
+    margin-bottom: 10px;
+    padding: 9px 14px;
+    border-radius: 9px;
+    color: #3a566e;
+    font-size: 0.95em;
+    box-shadow: inset 0 1px 0 #ffffffcc;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .item-list li:hover {
+    background: #d6e9fd;
+  }
+  .sub-list {
+    list-style-type: disc;
+    margin-left: 18px;
+    margin-top: 6px;
+  }
+  .sub-list li {
+    background: transparent;
+    margin-bottom: 6px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: #4a6a8a;
+  }
+  /* Scrollbar for horizontal scroll */
+  .timeline-container::-webkit-scrollbar {
+    height: 10px;
+  }
+  .timeline-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .timeline-container::-webkit-scrollbar-thumb {
+    background: #2980b9;
+    border-radius: 5px;
+  }
+  /* Responsive for small screen */
+  @media (max-width: 600px) {
+    .timeline-container {
+      gap: 18px;
+      padding-bottom: 14px;
+    }
+    .timeline-column {
+      min-width: 200px;
+      padding: 14px 16px;
+    }
+    .timeline-title {
+      font-size: 1.1em;
+    }
+    .item-list li {
+      font-size: 0.9em;
+      padding: 7px 10px;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Lịch sử Cơ sở Dữ liệu</h1>
+  <div class="timeline-container">
+    <div class="timeline-column">
+      <div class="timeline-title">Trước 1960<br><small>Quản lý thủ công</small></div>
+      <ul class="item-list">
+        <li>Lưu trữ: Giấy, thẻ đục lỗ, băng từ</li>
+        <li>Hạn chế: Tốn thời gian, dễ sai sót</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">1960s<br><small>Hệ thống tệp &amp; Mô hình phân cấp</small></div>
+      <ul class="item-list">
+        <li>Tệp-based systems: Ứng dụng tự quản lý dữ liệu</li>
+        <li>IMS (IBM): Cấu trúc cây</li>
+        <li>Hạn chế: Thiếu tính độc lập dữ liệu</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">1970s<br><small>Mô hình mạng &amp; Quan hệ</small></div>
+      <ul class="item-list">
+        <li>Mô hình mạng: CODASYL, cấu trúc đồ thị</li>
+        <li>
+          Mô hình quan hệ (E.F. Codd)
+          <ul class="sub-list">
+            <li>Tổ chức: Bảng, khóa</li>
+            <li>SQL: Ngôn ngữ truy vấn</li>
+            <li>DBMS: System R, Ingres</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">1980s<br><small>DBMS quan hệ bùng nổ</small></div>
+      <ul class="item-list">
+        <li>Thương mại: Oracle, DB2, Sybase</li>
+        <li>Cải tiến: Giao diện đồ họa, tối ưu truy vấn</li>
+        <li>Ứng dụng: Ngân hàng, hàng không</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">1990s<br><small>Hướng đối tượng &amp; Kho dữ liệu</small></div>
+      <ul class="item-list">
+        <li>OODBMS: ObjectStore, GemStone</li>
+        <li>Data Warehouse: BI, OLAP</li>
+        <li>Web: Tích hợp dữ liệu trực tuyến</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">2000s<br><small>NoSQL &amp; Big Data</small></div>
+      <ul class="item-list">
+        <li>
+          NoSQL
+          <ul class="sub-list">
+            <li>Loại: MongoDB, Cassandra, Redis, Neo4j</li>
+            <li>Đặc điểm: Phi cấu trúc, mở rộng ngang</li>
+          </ul>
+        </li>
+        <li>Big Data: Hadoop, Spark</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">2010s - Nay<br><small>Đám mây &amp; AI</small></div>
+      <ul class="item-list">
+        <li>Cloud DB: AWS RDS, Google Spanner</li>
+        <li>Thời gian thực: Kafka, DynamoDB</li>
+        <li>AI/ML: Phân tích dự đoán</li>
+        <li>NewSQL: CockroachDB, TiDB</li>
+        <li>Blockchain: CSDL phi tập trung</li>
+      </ul>
+    </div>
+    <div class="timeline-column">
+      <div class="timeline-title">Tương lai</div>
+      <ul class="item-list">
+        <li>Đa mô hình: PostgreSQL, MongoDB</li>
+        <li>Tự động hóa: AI tối ưu hóa</li>
+        <li>Bảo mật: GDPR, mã hóa</li>
+        <li>CSDL lượng tử</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
+
